@@ -1,0 +1,5 @@
+# Default owner for everything in the repository.
+* @shakthilab
+
+# Legal text requires the owner's review before it is published.
+/content/*.md @shakthilab

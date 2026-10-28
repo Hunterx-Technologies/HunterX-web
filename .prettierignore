@@ -1,0 +1,9 @@
+.next/
+out/
+build/
+coverage/
+node_modules/
+package-lock.json
+public/
+# Legal text is edited by hand and reviewed; don't reformat it.
+content/

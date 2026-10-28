@@ -1,0 +1,58 @@
+# Netlify detects Next.js and applies its Next.js runtime (OpenNext adapter)
+# automatically, so no plugin entry is needed and the publish directory is
+# handled by the runtime. Do not set `output: 'export'`: the site uses
+# server rendering (e.g. /invite/[code]).
+#
+# Node version: Netlify reads .nvmrc. Do not set NODE_VERSION here.
+[build]
+  command = "npm run build"
+
+# Security headers. Keep in sync with `securityHeaders` in next.config.ts.
+# HSTS deliberately omits includeSubDomains/preload so the api/admin
+# subdomains are not affected.
+[[headers]]
+  for = "/*"
+  [headers.values]
+    X-Content-Type-Options = "nosniff"
+    X-Frame-Options = "DENY"
+    Content-Security-Policy = "frame-ancestors 'none'"
+    Referrer-Policy = "strict-origin-when-cross-origin"
+    Permissions-Policy = "camera=(), microphone=(), geolocation=(), payment=(), usb=()"
+    Strict-Transport-Security = "max-age=31536000"
+
+# Hashed build output never changes for a given URL.
+[[headers]]
+  for = "/_next/static/*"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"
+
+# Icons and social images in public/ are not content-hashed, so cache them
+# for a week rather than forever; regenerated files then show up in days.
+[[headers]]
+  for = "/*.png"
+  [headers.values]
+    Cache-Control = "public, max-age=604800"
+
+[[headers]]
+  for = "/*.svg"
+  [headers.values]
+    Cache-Control = "public, max-age=604800"
+
+[[headers]]
+  for = "/favicon.ico"
+  [headers.values]
+    Cache-Control = "public, max-age=604800"
+
+# Deep-link files: must be JSON, served with no redirect. Mirrors
+# next.config.ts so they get the right Content-Type straight from the CDN.
+[[headers]]
+  for = "/.well-known/apple-app-site-association"
+  [headers.values]
+    Content-Type = "application/json"
+    Cache-Control = "public, max-age=3600"
+
+[[headers]]
+  for = "/.well-known/assetlinks.json"
+  [headers.values]
+    Content-Type = "application/json"
+    Cache-Control = "public, max-age=3600"
