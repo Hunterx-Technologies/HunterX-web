@@ -1,9 +1,5 @@
 @import "tailwindcss";
 
-/* `dark:` utilities apply when <html> has the .dark class (set by the theme
-   script in layout.tsx). */
-@custom-variant dark (&:where(.dark, .dark *));
-
 /* ==========================================================================
    Design tokens (shadcn/ui style). Colors are HSL; glass surfaces use alpha.
    ========================================================================== */
@@ -15,27 +11,7 @@
 
   --radius: 0.75rem;
 
-  /* Light theme */
-  --background: hsl(0 0% 97%); /* #F7F7F7 */
-  --foreground: hsl(240 9% 6.5%); /* #0F0F12 */
-  --card: hsl(0 0% 100% / 0.72); /* glass over #F7F7F7 */
-  --card-solid: hsl(0 0% 100%); /* #FFFFFF */
-  --card-foreground: var(--foreground);
-  --muted: hsl(240 10% 4% / 0.05);
-  --muted-foreground: hsl(240 5% 34%); /* #52525B, AA on light surfaces */
-  --border: hsl(240 10% 4% / 0.1);
-  --primary: var(--brand);
-  --primary-foreground: hsl(0 0% 0%);
-  --accent: var(--brand);
-  --accent-foreground: hsl(0 0% 0%);
-  /* Orange used as TEXT. Darkened in light mode so it passes WCAG AA. */
-  --primary-text: color-mix(in srgb, var(--brand) 70%, black);
-  --ring: var(--primary-text);
-  --grid-line: hsl(240 10% 4% / 0.06);
-  --glow: color-mix(in srgb, var(--brand) 22%, transparent);
-}
-
-.dark {
+  /* Dark only: there is no light theme. */
   --background: hsl(240 10% 3.9%); /* #09090B */
   --foreground: hsl(0 0% 95%); /* #F2F2F2 */
   --card: hsl(0 0% 100% / 0.04); /* glass: white at 4% */
@@ -44,10 +20,15 @@
   --muted: hsl(0 0% 100% / 0.06);
   --muted-foreground: hsl(240 5% 65%); /* #A1A1AA */
   --border: hsl(0 0% 100% / 0.08); /* white at 8% */
+  --primary: var(--brand);
+  --primary-foreground: hsl(0 0% 0%);
+  --accent: var(--brand);
+  --accent-foreground: hsl(0 0% 0%);
   --primary-text: var(--brand);
   --ring: var(--brand);
   --grid-line: hsl(0 0% 100% / 0.045);
   --glow: color-mix(in srgb, var(--brand) 28%, transparent);
+  color-scheme: dark;
 }
 
 @theme inline {
@@ -526,8 +507,7 @@ html[data-zen] .legal-body.prose-legal {
    no buttons or contents list, URLs after links, sensible page breaks.
    ========================================================================== */
 @media print {
-  :root,
-  :root.dark {
+  :root {
     --background: #fff;
     --foreground: #000;
     --card: #fff;

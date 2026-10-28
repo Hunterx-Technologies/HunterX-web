@@ -85,7 +85,7 @@ scripts/
   verify-assets.mjs         `npm run assets:verify`
 src/
   app/                      Routes (App Router)
-    layout.tsx              Site shell, Inter font, theme boot script
+    layout.tsx              Site shell, Inter font, boot script
     globals.css             Design tokens (CSS variables) + Tailwind setup
     page.tsx                / (intro, hero, how it works, ranks, download, FAQ)
     privacy/, terms/        Rendered from content/*.md
@@ -97,7 +97,7 @@ src/
     sitemap.ts, robots.ts
   components/
     ui/                     Small primitives (button, card, chip, section)
-    site/                   Header, footer, theme toggle, store buttons, ...
+    site/                   Header, footer, store buttons, ...
     home/                   Home page sections
     legal/                  Legal page layout, contents, Zen Mode
     account-deletion/       Deletion and cancel flows
@@ -170,13 +170,10 @@ Mode (larger centred text, Esc exits).
 
 - **Tokens** are CSS variables at the top of `src/app/globals.css`
   (`--background`, `--foreground`, `--card`, `--muted`, `--border`,
-  `--primary`, `--accent`, `--radius`). Light values are on `:root`, dark on
-  `.dark`.
+  `--primary`, `--accent`, `--radius`), all on `:root`.
 - **Accent colour** is defined once as `--brand` (`#fe5b01`) and must match
   `palette.orange` in HunterX-Mobile's `theme/colors.ts`.
-- **Theme:** dark by default; the OS preference is respected on first visit,
-  then the toggle's choice is saved in `localStorage`. An inline script in
-  `layout.tsx` applies it before paint.
+- **Theme:** dark only; there is no light theme or toggle.
 - **Motion** is CSS only and switched off for `prefers-reduced-motion`.
 - **Font:** Inter via `next/font`, self-hosted.
 
@@ -286,7 +283,7 @@ needed.
 ## Privacy
 
 The site sets no cookies and loads no analytics or third-party scripts.
-Browser storage is limited to `localStorage` (theme, Zen Mode) and
+Browser storage is limited to `localStorage` (Zen Mode) and
 `sessionStorage` (intro shown), both strictly functional. Add a consent
 banner before introducing analytics or tracking.
 

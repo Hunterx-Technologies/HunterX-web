@@ -2,7 +2,6 @@ import Link from "next/link";
 import { NAV_LINKS } from "@/config";
 import { buttonVariants } from "@/components/ui/button";
 import { MobileNav } from "./mobile-nav";
-import { ThemeToggle } from "./theme-toggle";
 import { Wordmark } from "./wordmark";
 
 export function Header() {
@@ -30,7 +29,6 @@ export function Header() {
         </nav>
 
         <div className="flex items-center gap-2">
-          <ThemeToggle />
           <Link
             href="/#download"
             className={buttonVariants({

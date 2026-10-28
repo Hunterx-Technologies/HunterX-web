@@ -51,22 +51,15 @@ export const metadata: Metadata = {
 };
 
 export const viewport: Viewport = {
-  themeColor: [
-    { media: "(prefers-color-scheme: dark)", color: "#09090B" },
-    { media: "(prefers-color-scheme: light)", color: "#F7F7F7" },
-  ],
+  themeColor: "#09090B",
+  colorScheme: "dark",
 };
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
-    // Default to dark; the boot script swaps to the saved/OS theme before
-    // paint, so <html> attributes legitimately differ from the server render.
-    <html
-      lang="en"
-      className={`dark ${inter.variable}`}
-      style={{ colorScheme: "dark" }}
-      suppressHydrationWarning
-    >
+    // The boot script adds data-* attributes before paint, so <html>
+    // legitimately differs from the server render.
+    <html lang="en" className={inter.variable} suppressHydrationWarning>
       <head>
         <script dangerouslySetInnerHTML={{ __html: BOOT_SCRIPT }} />
       </head>
