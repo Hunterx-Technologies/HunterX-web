@@ -23,8 +23,8 @@ const jsonHeaders = [
 ];
 
 const nextConfig: NextConfig = {
-  // Normal server rendering (no `output: 'export'`) so API routes and
-  // dynamic pages keep working.
+  // Normal server rendering (static HTML export is intentionally not used)
+  // so API routes and dynamic pages keep working.
   poweredByHeader: false,
   // Never add or strip trailing slashes, so /.well-known files are served
   // directly with no redirect.
