@@ -30,6 +30,9 @@ export const PLAY_STORE_URL =
 /** Custom URL scheme the app registers, used for "Open in app" links. */
 export const APP_SCHEME = "hunterx";
 
+/** Android application ID, used for intent:// links that open the app. */
+export const ANDROID_PACKAGE = "com.hunterx.mobile";
+
 export const COMPANY = {
   name: "Hunterx Technologies",
   address: {

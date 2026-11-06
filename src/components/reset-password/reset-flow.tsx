@@ -1,46 +1,31 @@
 "use client";
 
-import { Check, ExternalLink, Eye, EyeOff, X } from "lucide-react";
-import Link from "next/link";
-import {
-  useEffect,
-  useId,
-  useState,
-  useSyncExternalStore,
-  type FormEvent,
-} from "react";
-import { APP_SCHEME } from "@/config";
-import {
-  PASSWORD_RULES,
-  ResetApiError,
-  meetsPasswordRules,
-  resetPassword,
-  type ResetErrorCode,
-} from "@/lib/reset-password-api";
-import { cn } from "@/lib/utils";
+import { ExternalLink, Smartphone } from "lucide-react";
+import { useEffect, useSyncExternalStore } from "react";
+import { ANDROID_PACKAGE, APP_SCHEME } from "@/config";
 import { buttonVariants } from "@/components/ui/button";
-import {
-  Honeypot,
-  Input,
-  LiveError,
-  Notice,
-  StepHeading,
-  SubmitButton,
-  honeypotFilled,
-} from "@/components/account-deletion/form-parts";
 import { StoreButtons } from "@/components/site/store-buttons";
 
 /* ---------------------------------------------------------------------------
- * Token from the email link (?token=...). Read once, kept only in memory and
- * removed from the address bar straight away, so it does not stay in browser
- * history or get copied along with the URL. Never logged.
+ * The password is reset in the app, never on this page. The page only hands
+ * the email link's token (?token=...) to the app: automatically on Android,
+ * with a button as the backup everywhere.
+ *
+ * The token is read once, kept only in memory and removed from the address
+ * bar straight away, so it doesn't stay in browser history or get copied
+ * along with the URL. Never logged.
  * ------------------------------------------------------------------------- */
 let capturedToken: string | null = null;
+// ?app=0 marks a return from a failed Android auto-open (see intentUrl), so
+// the page doesn't try again and loop.
+let autoOpenTried = false;
 
 function getToken() {
   if (capturedToken === null) {
-    const token = new URLSearchParams(window.location.search).get("token");
+    const params = new URLSearchParams(window.location.search);
+    const token = params.get("token");
     if (token) capturedToken = token;
+    autoOpenTried = params.get("app") === "0";
   }
   return capturedToken;
 }
@@ -49,8 +34,9 @@ const subscribe = () => () => {};
 
 function stripTokenFromUrl() {
   const url = new URL(window.location.href);
-  if (!url.searchParams.has("token")) return;
+  if (!url.searchParams.has("token") && !url.searchParams.has("app")) return;
   url.searchParams.delete("token");
+  url.searchParams.delete("app");
   window.history.replaceState(
     window.history.state,
     "",
@@ -58,282 +44,133 @@ function stripTokenFromUrl() {
   );
 }
 
+type Platform = "android" | "ios" | "other";
+
+function getPlatform(): Platform {
+  const ua = navigator.userAgent;
+  if (/android/i.test(ua)) return "android";
+  // iPadOS reports itself as a Mac; touch support tells them apart.
+  if (
+    /iphone|ipad|ipod/i.test(ua) ||
+    (/macintosh/i.test(ua) && navigator.maxTouchPoints > 1)
+  )
+    return "ios";
+  return "other";
+}
+
+function schemeUrl(token: string) {
+  return `${APP_SCHEME}://reset-password?token=${encodeURIComponent(token)}`;
+}
+
+/**
+ * Android intent link: opens the app when it is installed. When it isn't,
+ * Chrome loads browser_fallback_url (this page again, marked app=0 so it
+ * doesn't retry) instead of showing an error or the Play Store.
+ */
+function intentUrl(token: string) {
+  const fallback = new URL(window.location.pathname, window.location.origin);
+  fallback.searchParams.set("token", token);
+  fallback.searchParams.set("app", "0");
+  return (
+    `intent://reset-password?token=${encodeURIComponent(token)}` +
+    `#Intent;scheme=${APP_SCHEME};package=${ANDROID_PACKAGE};` +
+    `S.browser_fallback_url=${encodeURIComponent(fallback.toString())};end`
+  );
+}
+
 const FORGOT_PATH = "Login > Forgot password";
 
-function messageFor(code: ResetErrorCode): string {
-  switch (code) {
-    case "weak_password":
-      return "That password doesn't meet the rules below. Please choose a stronger one.";
-    case "rate_limited":
-      return "Too many attempts. Please wait a few minutes and try again.";
-    case "network":
-      return "We couldn't reach HunterX. Check your connection and try again.";
-    case "not_configured":
-      return "Password reset isn't available on the website right now. Please use the HunterX app.";
-    default:
-      return "Something went wrong. Please try again.";
-  }
+function Heading({ children }: { children: React.ReactNode }) {
+  return <h2 className="text-xl font-semibold tracking-tight">{children}</h2>;
 }
 
-/* ------------------------------------------------------------------------- */
-
-function OpenInApp({ token }: { token: string }) {
+function MissingToken() {
   return (
-    <a
-      href={`${APP_SCHEME}://reset-password?token=${encodeURIComponent(token)}`}
-      className={buttonVariants({ variant: "secondary", size: "lg" })}
-    >
-      Open in the HunterX app
-      <ExternalLink aria-hidden="true" className="size-4" />
-    </a>
-  );
-}
-
-function InvalidLink() {
-  return (
-    <div className="space-y-6">
-      <StepHeading autoFocus={false}>
-        This reset link has expired or was already used
-      </StepHeading>
+    <div className="space-y-4">
+      <Heading>This reset link is incomplete</Heading>
       <p className="text-muted-foreground">
-        Reset links work once and expire after a short time. Request a new one
-        in the HunterX app: go to{" "}
-        <span className="font-semibold text-foreground">{FORGOT_PATH}</span> and
-        enter your email.
+        Open the reset email on your phone and tap the link again. If it still
+        doesn&rsquo;t work, request a new one in the HunterX app:{" "}
+        <span className="font-semibold text-foreground">{FORGOT_PATH}</span>.
       </p>
-      <Link
-        href="/support"
-        className={buttonVariants({ variant: "secondary" })}
-      >
-        Get support
-      </Link>
     </div>
   );
 }
 
-function Done() {
+function OnDesktop() {
   return (
-    <div className="space-y-6">
-      <Notice tone="success">Your password has been changed.</Notice>
-      <StepHeading>You&rsquo;re all set</StepHeading>
-      <p className="text-muted-foreground">
-        Open HunterX and log in with your email and new password. For your
-        security, you&rsquo;ve been signed out on your other devices.
-      </p>
-      <div>
-        <h3 className="text-base font-semibold">Don&rsquo;t have the app?</h3>
-        <StoreButtons className="mt-4" />
+    <div className="space-y-4">
+      <div className="flex items-center gap-2 text-primary-text">
+        <Smartphone aria-hidden="true" className="size-5" />
+        <Heading>Open this link on your phone</Heading>
       </div>
+      <p className="text-muted-foreground">
+        Passwords are reset in the HunterX app. Open the reset email on the
+        phone where HunterX is installed and tap the link there.
+      </p>
     </div>
   );
 }
 
-function PasswordField({
-  id,
-  label,
-  value,
-  onChange,
-  invalid,
-  describedBy,
-  disabled,
-}: {
-  id: string;
-  label: string;
-  value: string;
-  onChange: (value: string) => void;
-  invalid?: boolean;
-  describedBy?: string;
-  disabled?: boolean;
-}) {
-  const [visible, setVisible] = useState(false);
+function OnPhone({ token, platform }: { token: string; platform: Platform }) {
   return (
-    <div>
-      <label htmlFor={id} className="text-sm font-medium">
-        {label}
-      </label>
-      <div className="relative mt-2">
-        <Input
-          id={id}
-          type={visible ? "text" : "password"}
-          autoComplete="new-password"
-          value={value}
-          onChange={(e) => onChange(e.target.value)}
-          aria-invalid={invalid || undefined}
-          aria-describedby={describedBy}
-          disabled={disabled}
-          required
-          className="pr-12"
-        />
-        <button
-          type="button"
-          onClick={() => setVisible((v) => !v)}
-          aria-label={
-            visible
-              ? `Hide ${label.toLowerCase()}`
-              : `Show ${label.toLowerCase()}`
-          }
-          aria-pressed={visible}
-          className="absolute inset-y-0 right-0 flex w-12 items-center justify-center rounded-r-xl text-muted-foreground hover:text-foreground focus-visible:outline-2 focus-visible:outline-ring"
+    <div className="space-y-10">
+      <div className="space-y-4">
+        <Heading>Continue in the HunterX app</Heading>
+        <p className="text-muted-foreground">
+          {platform === "android"
+            ? "HunterX should open by itself. If it didn't, tap the button."
+            : "Tap the button to open HunterX and choose your new password."}
+        </p>
+        <a
+          href={platform === "android" ? intentUrl(token) : schemeUrl(token)}
+          className={buttonVariants({ size: "lg" })}
         >
-          {visible ? (
-            <EyeOff aria-hidden="true" className="size-4" />
-          ) : (
-            <Eye aria-hidden="true" className="size-4" />
-          )}
-        </button>
+          Open in the HunterX app
+          <ExternalLink aria-hidden="true" className="size-4" />
+        </a>
+      </div>
+
+      <div className="space-y-4 border-t pt-8">
+        <h3 className="text-base font-semibold">Don&rsquo;t have HunterX?</h3>
+        <p className="text-sm text-muted-foreground">
+          Install it, then come back to the reset email and tap the link again.
+        </p>
+        <StoreButtons />
       </div>
     </div>
-  );
-}
-
-function ResetForm({
-  token,
-  onDone,
-  onInvalid,
-}: {
-  token: string;
-  onDone: () => void;
-  onInvalid: () => void;
-}) {
-  const ids = useId();
-  const [password, setPassword] = useState("");
-  const [confirm, setConfirm] = useState("");
-  const [busy, setBusy] = useState(false);
-  const [error, setError] = useState<string | null>(null);
-  const [submitted, setSubmitted] = useState(false);
-
-  const rulesOk = meetsPasswordRules(password);
-  const matches = password === confirm;
-
-  async function handleSubmit(event: FormEvent<HTMLFormElement>) {
-    event.preventDefault();
-    setSubmitted(true);
-    setError(null);
-    if (honeypotFilled(event.currentTarget)) return;
-    if (!rulesOk) {
-      setError("Your new password doesn't meet all the rules yet.");
-      return;
-    }
-    if (!matches) {
-      setError("The passwords don't match.");
-      return;
-    }
-
-    setBusy(true);
-    try {
-      await resetPassword(token, password);
-      setPassword("");
-      setConfirm("");
-      onDone();
-    } catch (err) {
-      const code = err instanceof ResetApiError ? err.code : "unknown";
-      if (code === "invalid_token") {
-        onInvalid();
-        return;
-      }
-      setError(messageFor(code));
-    } finally {
-      setBusy(false);
-    }
-  }
-
-  return (
-    <form onSubmit={handleSubmit} noValidate className="relative space-y-6">
-      <StepHeading autoFocus={false}>Choose a new password</StepHeading>
-      <Honeypot />
-
-      <PasswordField
-        id={`${ids}-new`}
-        label="New password"
-        value={password}
-        onChange={setPassword}
-        invalid={submitted && !rulesOk}
-        describedBy={`${ids}-rules`}
-        disabled={busy}
-      />
-
-      <ul id={`${ids}-rules`} className="grid gap-2 text-sm sm:grid-cols-2">
-        {PASSWORD_RULES.map((rule) => {
-          const ok = rule.test(password);
-          return (
-            <li
-              key={rule.id}
-              className={cn(
-                "flex items-center gap-2",
-                ok ? "text-foreground" : "text-muted-foreground",
-              )}
-            >
-              {ok ? (
-                <Check
-                  aria-hidden="true"
-                  className="size-4 text-primary-text"
-                />
-              ) : (
-                <X aria-hidden="true" className="size-4" />
-              )}
-              {rule.label}
-              <span className="sr-only">{ok ? "(met)" : "(not met)"}</span>
-            </li>
-          );
-        })}
-      </ul>
-
-      <PasswordField
-        id={`${ids}-confirm`}
-        label="Confirm new password"
-        value={confirm}
-        onChange={setConfirm}
-        invalid={submitted && !matches}
-        disabled={busy}
-      />
-
-      <LiveError message={error} />
-
-      <SubmitButton busy={busy} busyLabel="Updating…">
-        Update password
-      </SubmitButton>
-    </form>
   );
 }
 
 export function ResetFlow() {
   // undefined while server rendering: the token only exists in the browser's
-  // URL, so wait for it instead of flashing the "link expired" message.
+  // URL, so wait for it instead of flashing the "incomplete link" message.
   const token = useSyncExternalStore<string | null | undefined>(
     subscribe,
     getToken,
     () => undefined,
   );
-  const [state, setState] = useState<"form" | "invalid" | "done">("form");
+  const platform = useSyncExternalStore<Platform>(
+    subscribe,
+    getPlatform,
+    () => "other",
+  );
 
   useEffect(() => {
+    // Android: hand the link to the app straight away when it's installed.
+    // Not installed → Chrome comes back here with app=0 and the page stays.
+    // iOS has no silent equivalent: opening a custom scheme for an app that
+    // isn't installed shows a Safari error, so iOS uses the button (and the
+    // email link itself opens the app there via universal links).
+    if (token && platform === "android" && !autoOpenTried) {
+      autoOpenTried = true;
+      window.location.href = intentUrl(token);
+    }
     stripTokenFromUrl();
-  }, []);
+  }, [token, platform]);
 
-  if (token === undefined) return <div className="min-h-64" aria-busy="true" />;
-  if (!token || state === "invalid") return <InvalidLink />;
-  if (state === "done") return <Done />;
-
-  return (
-    <div className="space-y-10">
-      <div className="space-y-4">
-        <p className="text-muted-foreground">
-          On your phone with HunterX installed? Finish there:
-        </p>
-        <OpenInApp token={token} />
-      </div>
-
-      <div className="flex items-center gap-4 text-xs font-semibold tracking-[0.2em] text-muted-foreground uppercase">
-        <span aria-hidden="true" className="h-px flex-1 bg-border" />
-        or reset it here
-        <span aria-hidden="true" className="h-px flex-1 bg-border" />
-      </div>
-
-      <ResetForm
-        token={token}
-        onDone={() => setState("done")}
-        onInvalid={() => setState("invalid")}
-      />
-    </div>
-  );
+  if (token === undefined) return <div className="min-h-40" aria-busy="true" />;
+  if (!token) return <MissingToken />;
+  if (platform === "other") return <OnDesktop />;
+  return <OnPhone token={token} platform={platform} />;
 }

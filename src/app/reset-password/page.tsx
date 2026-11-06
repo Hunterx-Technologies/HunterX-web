@@ -5,13 +5,15 @@ import { Container } from "@/components/ui/section";
 import { PageHeader } from "@/components/site/page-header";
 import { ResetFlow } from "@/components/reset-password/reset-flow";
 
-// Opened from the password-reset email. When HunterX is installed the
-// link opens the app instead (apple-app-site-association / assetlinks.json);
-// this page is the fallback for browsers, desktops and pasted links.
+// Opened from the password-reset email. When HunterX is installed the link
+// opens the app directly (apple-app-site-association / assetlinks.json).
+// This page is the backup when it doesn't: it hands the link to the app
+// (automatically on Android, with a button everywhere). The password itself
+// is only ever changed in the app.
 // Personal, single-use link: never indexed.
 export const metadata: Metadata = pageMetadata({
   title: "Reset your HunterX password",
-  description: "Choose a new password for your HunterX account.",
+  description: "Open the HunterX app to choose a new password.",
   path: "/reset-password",
   noIndex: true,
   absoluteTitle: true,
