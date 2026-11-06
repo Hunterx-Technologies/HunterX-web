@@ -39,12 +39,12 @@ and validated by [`src/env.ts`](src/env.ts) when `next dev` or `next build`
 starts. A missing or malformed required variable stops the build with a
 message naming the variable.
 
-| Variable                     | Required | Purpose                                             |
-| ---------------------------- | -------- | --------------------------------------------------- |
-| `NEXT_PUBLIC_SITE_URL`       | Yes      | Canonical origin, e.g. `https://hunterx.co.in`      |
-| `NEXT_PUBLIC_API_URL`        | Yes      | Backend base URL for the account-deletion endpoints |
-| `NEXT_PUBLIC_APP_STORE_URL`  | No       | App Store listing; `""` shows "Coming soon"         |
-| `NEXT_PUBLIC_PLAY_STORE_URL` | No       | Google Play listing; `""` shows "Coming soon"       |
+| Variable                     | Required | Purpose                                                                                                                         |
+| ---------------------------- | -------- | ------------------------------------------------------------------------------------------------------------------------------- |
+| `NEXT_PUBLIC_SITE_URL`       | Yes      | Canonical origin, e.g. `https://hunterx.co.in`                                                                                  |
+| `NEXT_PUBLIC_API_URL`        | Yes      | Backend base URL **including `/api`** (e.g. `https://api.hunterx.co.in/api`), for the account-deletion and reset-password pages |
+| `NEXT_PUBLIC_APP_STORE_URL`  | No       | App Store listing; `""` shows "Coming soon"                                                                                     |
+| `NEXT_PUBLIC_PLAY_STORE_URL` | No       | Google Play listing; `""` shows "Coming soon"                                                                                   |
 
 `NEXT_PUBLIC_` values are built into the browser bundle. Never put secrets
 in them. All `.env*` files except `.env.example` are git-ignored.

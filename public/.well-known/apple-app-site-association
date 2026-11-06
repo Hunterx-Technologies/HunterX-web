@@ -2,8 +2,12 @@
   "applinks": {
     "details": [
       {
-        "appIDs": ["TEAMID.com.gymgasm.hunterx"],
-        "components": [{ "/": "/invite/*" }]
+        "appIDs": ["U6UNLW7PN7.com.hunterx.mobile"],
+        "components": [
+          { "/": "/invite/*" },
+          { "/": "/reset-password", "comment": "password reset link (?token=…)" },
+          { "/": "/reset-password/*" }
+        ]
       }
     ]
   }

@@ -2,7 +2,8 @@ import type { MetadataRoute } from "next";
 import { SITE_URL } from "@/config";
 import { getLegalDocument } from "@/lib/content";
 
-// /invite/* pages are personal referral links and are intentionally excluded.
+// /invite/* (referral links) and /reset-password (single-use links) are
+// personal and intentionally excluded.
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const [privacy, terms] = await Promise.all([
     getLegalDocument("privacy"),

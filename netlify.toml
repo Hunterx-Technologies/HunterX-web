@@ -56,3 +56,11 @@
   [headers.values]
     Content-Type = "application/json"
     Cache-Control = "public, max-age=3600"
+
+# Password-reset fallback page: its URL carries a single-use token, so it
+# is never cached and never sent on as a referrer. Mirrors next.config.ts.
+[[headers]]
+  for = "/reset-password"
+  [headers.values]
+    Cache-Control = "no-store"
+    Referrer-Policy = "no-referrer"

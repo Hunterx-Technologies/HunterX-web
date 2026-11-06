@@ -38,6 +38,15 @@ const nextConfig: NextConfig = {
         headers: jsonHeaders,
       },
       { source: "/.well-known/assetlinks.json", headers: jsonHeaders },
+      // The URL carries a single-use reset token: never cache it, never
+      // send it on as a referrer. Mirrored in netlify.toml.
+      {
+        source: "/reset-password",
+        headers: [
+          { key: "Cache-Control", value: "no-store" },
+          { key: "Referrer-Policy", value: "no-referrer" },
+        ],
+      },
     ];
   },
 };
