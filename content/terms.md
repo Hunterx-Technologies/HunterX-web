@@ -1,6 +1,6 @@
 ---
 title: "Terms and Conditions"
-updated: "27 October 2026"
+updated: "4 November 2026"
 summary: "HunterX is free to download. These Terms explain how the game works, fair play, rewards from our partner Gymgasm, and your rights."
 ---
 
@@ -121,7 +121,7 @@ If you believe content in the Services infringes your rights, email customercare
 
 We send you service messages by email and in the app, such as sign-in codes (OTP), security notices, changes to these Terms and replies to your requests. These are part of the Services and you cannot opt out of them while you have an account.
 
-Push notifications about quests, streaks and rewards are optional and you can turn them off in your device settings or in the app. We send promotional messages only if you agree to receive them, and you can withdraw that agreement at any time.
+Push notifications about quests, streaks, rewards and friends are optional and you can turn them off in your device settings or in the app. Offers and announcements (including reward partner offers) are promotional and are sent only if you turn them on, for example by ticking "Also send me offers & announcements" or in Settings → Offers & Announcements. You can turn them off again at any time. Our Privacy Policy lists the notifications we send.
 
 ## 11. Third-Party Services
 

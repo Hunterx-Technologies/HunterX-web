@@ -1,6 +1,6 @@
 ---
 title: "Privacy Policy"
-updated: "27 October 2026"
+updated: "4 November 2026"
 summary: "We collect only what HunterX needs to run quests, XP, streaks and rewards. We never sell your data and never use health data for advertising."
 ---
 
@@ -29,7 +29,7 @@ If you have questions or requests about your personal information, contact us us
 
 What we collect depends on the features you use and the permissions you give.
 
-**3.1 Account and sign-in information.** Your name or display name, email address, a unique account ID (your Hunter ID), your sign-in method (email, Google or Apple) and account status. If you sign in with Google or Apple, we receive the details that provider shares with us. If you use Sign in with Apple, you may choose to hide your email address. We never receive your Google or Apple password. If you register with email and password, we store your password only in encrypted (hashed) form and send a one-time code (OTP) to your email to verify it.
+**3.1 Account and sign-in information.** Your name or display name, email address, a unique account ID (your Hunter ID), your sign-in method (email, Google or Apple) and account status. If you sign in with Google or Apple, we receive the details that provider shares with us. If you use Sign in with Apple, you may choose to hide your email address, and we also store a token Apple issues to us so that we can revoke HunterX's access to your Apple ID when you delete your account. We never receive your Google or Apple password. If you register with email and password, we store your password only in encrypted (hashed) form and send a one-time code (OTP) to your email to verify it.
 
 **3.2 Profile and fitness information.** Date of birth (used to confirm you meet our age requirement), gender, height, weight, your answers to the onboarding questions, and fitness goals and preferences. From these we calculate your age, your BMI and your daily goals: a step goal (from BMI and age), a water goal (from weight) and a protein goal (from weight and activity level). We store these values with your profile. We use it to set up your profile and tailor quests and progress displays.
 
@@ -37,11 +37,11 @@ What we collect depends on the features you use and the permissions you give.
 
 **3.4 Quests, XP and app activity.** Quests started and completed, XP, level and rank, streaks, badges, rewards earned or redeemed, and your use of in-app features. We use this to calculate progress, run leaderboards, give rewards and detect cheating.
 
-**3.5 Leaderboard information.** If you appear on a leaderboard, other users can see your display name, avatar, XP, rank and streak.
+**3.5 Leaderboard information.** If you appear on a leaderboard, other users can see your display name, avatar, XP, rank and streak. Friends who have Friends & Referrals or Leaderboard notifications turned on may get a notification that mentions your display name, for example when you join through their invite or pass them on the leaderboard. You can hide yourself from leaderboards in Settings.
 
 **3.6 Photos and files.** An avatar or other image you upload, any image you attach to feedback, and photos you submit as proof for quests. These files are stored with our file-storage provider (Section 6). Quest proof photos are reviewed by HunterX team members through our admin panel, who may approve them, ask you to resubmit, or reject them with a reason. They are deleted when you delete your account, and when you submit new proof the earlier photo is deleted.
 
-**3.7 Device and notification information.** If you turn on push notifications, we process a push token and an app-install identifier (created by Firebase so notifications can reach your device), basic device and app information (such as app version, device model and operating system) and your notification settings.
+**3.7 Device and notification information.** If you turn on push notifications, we process a push token for your device (issued through Apple Push Notification service on iOS or Firebase Cloud Messaging on Android, and passed through Expo), your device platform and app version, your time zone, your preferred reminder time, the last time the app was opened on that device, and your notification settings. We use your time zone and reminder time to send reminders at a sensible local time and to hold notifications during quiet hours, and the last-opened time to decide whether to send a reminder when you have not used the app for a while.
 
 **3.8 Feedback and support.** The messages, contact details and attachments you send when you contact us or submit feedback. When you submit feedback in the app, we also receive your name, email address, Hunter ID, app version, device operating system, level and any screenshot you attach. We send an alert containing this information to a private team channel on Discord (Section 6.1).
 
@@ -139,7 +139,7 @@ You can delete your HunterX account and the personal information linked to it in
 
 After we verify your request, we delete your account and personal information within 30 days, and we ask our service providers to delete their copies where applicable. We may keep limited records where the law requires it or where they are needed to prevent fraud, as set out in Section 9.
 
-Uninstalling the app does not delete your account. If you signed in with Apple, deleting your account also ends the link between HunterX and your Apple ID.
+Uninstalling the app does not delete your account. If you signed in with Apple, deleting your account also asks Apple to revoke HunterX's access to your Apple ID, which ends the link between them. You can also stop using Sign in with Apple for HunterX at any time in your Apple ID settings.
 
 ## 11. Your Privacy Rights
 
@@ -168,7 +168,14 @@ When you sign in with Google or Apple, connect Apple Health or Health Connect, o
 
 ## 15. Notifications
 
-Push notifications are optional. We send them for quests, streaks, rewards, account activity and service updates, and we send promotional notifications only if you have agreed to them. We never put sensitive health details in notification text. You can turn notifications off in your device settings or in the app at any time.
+Push notifications are optional and need your permission on your device. If you allow them, we may send:
+
+- **Activity notifications:** quest reminders, streak alerts, level-ups, rewards earned or about to expire, health-sync reminders, a daily motivation message, and a reminder if you have not opened the app for a few days.
+- **Social notifications:** when a friend you invited joins, or when your leaderboard position changes.
+- **Account and service notifications:** for example updates on feedback you sent us.
+- **Offers and announcements:** news, events and offers from HunterX or our reward partners. These are promotional, so they are **off unless you turn them on**, either by ticking "Also send me offers & announcements" when you enable notifications or in Settings → Offers & Announcements.
+
+We hold non-urgent notifications during quiet hours (10 pm to 7 am in your time zone) and limit how many reminder-type notifications you get each day. We never put sensitive health details in notification text. You can turn each type of notification off in Settings in the app, or turn all notifications off in your device settings, at any time.
 
 ## 16. Changes to This Policy
 
