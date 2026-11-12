@@ -133,7 +133,7 @@ When we no longer need information, we delete it or remove anything that identif
 
 You can delete your HunterX account and the personal information linked to it in either of these ways.
 
-**In the app.** Open HunterX and go to **Settings → Account → Delete Account**, then confirm.
+**In the app.** Open HunterX and go to **Settings → Edit Profile → Delete Account**, then confirm.
 
 **On the web or by email.** Visit https://hunterx.co.in/delete-account, or email customercare@hunterx.co.in from the email address registered to your account with the subject "HunterX Account Deletion Request". We may ask you to confirm you own the account.
 

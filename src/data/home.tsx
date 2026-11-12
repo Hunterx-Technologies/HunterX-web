@@ -92,8 +92,8 @@ export const FAQS: { question: string; answer: ReactNode }[] = [
     question: "How do I delete my account?",
     answer: (
       <p>
-        In the app, go to Settings &gt; Account &gt; Delete Account. You can
-        also email us. Both options are explained on our{" "}
+        In the app, go to Settings &gt; Edit Profile &gt; Delete Account. You
+        can also email us. Both options are explained on our{" "}
         <Link href="/delete-account" className={linkClass}>
           account deletion page
         </Link>

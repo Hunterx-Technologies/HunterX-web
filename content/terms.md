@@ -131,7 +131,7 @@ You may connect or disconnect Apple Health or Health Connect at any time in your
 
 ## 12. Suspension, Termination and Account Deletion
 
-**By you.** You can stop using the Services and delete your account at any time: in the app, go to Settings → Account → Delete Account, or use https://hunterx.co.in/delete-account or email customercare@hunterx.co.in. Uninstalling the app does not delete your account. What happens to your data is explained in our Privacy Policy.
+**By you.** You can stop using the Services and delete your account at any time: in the app, go to Settings → Edit Profile → Delete Account, or use https://hunterx.co.in/delete-account or email customercare@hunterx.co.in. Uninstalling the app does not delete your account. What happens to your data is explained in our Privacy Policy.
 
 **By us.** We may suspend or end your access, with or without notice, if you break these Terms, if we must by law, if your account is inactive for a long time, if you put the Services or other users at risk, or if we stop offering the Services. Where reasonable we will tell you why and, for a mistaken action, let you ask us to review it.
 

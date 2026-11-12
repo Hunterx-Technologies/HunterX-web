@@ -78,7 +78,7 @@ export const SUPPORT = {
 
 export const ACCOUNT_DELETION = {
   emailSubject: "HunterX Account Deletion Request",
-  inAppPath: ["Settings", "Account", "Delete Account"],
+  inAppPath: ["Settings", "Edit Profile", "Delete Account"],
   deletionDays: 30,
   backupRetentionDays: 30,
 } as const;
