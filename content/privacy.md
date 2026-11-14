@@ -1,7 +1,7 @@
 ---
 title: "Privacy Policy"
-updated: "4 November 2026"
-summary: "We collect only what HunterX needs to run quests, XP, streaks and rewards. We never sell your data and never use health data for advertising."
+updated: "15 November 2026"
+summary: "We collect only what HunterX needs to run quests, XP, streaks and rewards. Health data from Apple Health or Health Connect stays on your phone. We never sell your data and never use health data for advertising."
 ---
 
 ## 1. Introduction
@@ -33,11 +33,13 @@ What we collect depends on the features you use and the permissions you give.
 
 **3.2 Profile and fitness information.** Date of birth (used to confirm you meet our age requirement), gender, height, weight, your answers to the onboarding questions, and fitness goals and preferences. From these we calculate your age, your BMI and your daily goals: a step goal (from BMI and age), a water goal (from weight) and a protein goal (from weight and activity level). We store these values with your profile. We use it to set up your profile and tailor quests and progress displays.
 
-**3.3 Health and activity information.** If you connect Apple Health (iOS) or Health Connect (Android) and grant permission, we may read: steps, active calories burned, distance, heart rate, sleep and workouts. We read only the data types you approve, and we only read: we never write anything back to Apple Health or Health Connect. Each day we save a summary on our servers: steps, calories, distance, average heart rate, sleep duration and number of workouts, plus a daily active-minutes figure that we calculate ourselves from your steps and workouts (it is not read from Apple Health or Health Connect). Section 7 explains how we protect this data.
+**3.3 Health and activity information.** If you connect Apple Health (iOS) or Health Connect (Android) and grant permission, the app may read: steps, active calories burned, distance, heart rate, sleep and workouts. It reads only the data types you approve, and it only reads: we never write anything back to Apple Health or Health Connect. On Android, you may also allow HunterX to read your past health data (from before you connected), so your yearly view is complete; this is optional. **This data is read and shown on your phone only. It is not sent to or stored on our servers.** The app uses it to show your activity on the Metrics screen (today, this week, this month and this year), including an active-minutes figure the app estimates from your steps and workouts. Earlier versions of the app saved a daily summary on our servers; we have deleted those summaries. Section 7 explains how we handle this data.
 
 **3.4 Quests, XP and app activity.** Quests started and completed, XP, level and rank, streaks, badges, rewards earned or redeemed, and your use of in-app features. We use this to calculate progress, run leaderboards, give rewards and detect cheating.
 
-**3.5 Leaderboard information.** If you appear on a leaderboard, other users can see your display name, avatar, XP, rank and streak. Friends who have Friends & Referrals or Leaderboard notifications turned on may get a notification that mentions your display name, for example when you join through their invite or pass them on the leaderboard. You can hide yourself from leaderboards in Settings.
+**3.5 Leaderboard, friends and blocking.** If you appear on a leaderboard, other users can see your display name, avatar, XP, rank and streak. Tapping your name opens your hunter card, which also shows your level and rank title, your best streak and the month you joined. Friends who have Friends & Referrals or Leaderboard notifications turned on may get a notification that mentions your display name, for example when you join through their invite or pass them on the leaderboard. You can hide yourself from leaderboards in Settings.
+
+If you use friends, we store your friend requests and friendships (including friends made through an invite code or link). If you block another user, we store that block: the blocked user is hidden from your leaderboard, neither of you can send the other a friend request, and they are not told. You can see and undo your blocks in Settings → Blocked hunters.
 
 **3.6 Photos and files.** An avatar or other image you upload, any image you attach to feedback, and photos you submit as proof for quests. These files are stored with our file-storage provider (Section 6). Quest proof photos are reviewed by HunterX team members through our admin panel, who may approve them, ask you to resubmit, or reject them with a reason. They are deleted when you delete your account, and when you submit new proof the earlier photo is deleted.
 
@@ -55,7 +57,7 @@ We use your information to:
 
 - create and secure your account and verify your sign-in;
 - run quests, XP, levels, streaks, badges, leaderboards and your progress screens;
-- read the health and activity data you allow and show your own progress;
+- read the health and activity data you allow, on your phone, to show your activity on the Metrics screen;
 - give out rewards, referrals and scratch cards, and check that people are eligible;
 - send notifications you have turned on;
 - answer support requests and improve the app;
@@ -100,8 +102,9 @@ They may use your information only to provide their services to us, under their 
 
 Health and fitness data is sensitive. We handle it as follows.
 
-- We read it only through Apple Health or Health Connect, and only the types you approve.
-- We use it only to show your own progress and to power quests, XP and streaks.
+- The app reads it only through Apple Health or Health Connect, and only the types you approve.
+- It is read and shown on your phone only. We do not send it to or store it on our servers, and HunterX team members cannot see it.
+- It is used only to show your own activity on the Metrics screen. Quests, XP, streaks and leaderboards do not use it.
 - We do not sell it, and we do not use it for advertising, marketing or profiling.
 - We do not share it with advertisers, data brokers or insurers.
 - We do not store it in iCloud, and we do not write false data back to Apple Health.
@@ -120,7 +123,8 @@ We keep information only as long as we need it for the purposes in this policy o
 
 | Information | How long we keep it |
 | --- | --- |
-| Account, profile, health summary and activity data | While your account is active. Deleted within 30 days of a verified deletion request. |
+| Account, profile and activity data | While your account is active. Deleted within 30 days of a verified deletion request. |
+| Health data from Apple Health or Health Connect | Not stored on our servers. It stays in Apple Health or Health Connect on your phone. |
 | Backups | Deleted copies may remain in encrypted backups for up to 30 more days until they are overwritten. |
 | Support messages and attachments | Up to 12 months after the request is closed, or deleted with your account if you ask. |
 | Reward and fraud-prevention records | Up to 12 months after account deletion, without information that identifies you where possible. |
@@ -170,7 +174,7 @@ When you sign in with Google or Apple, connect Apple Health or Health Connect, o
 
 Push notifications are optional and need your permission on your device. If you allow them, we may send:
 
-- **Activity notifications:** quest reminders, streak alerts, level-ups, rewards earned or about to expire, health-sync reminders, a daily motivation message, and a reminder if you have not opened the app for a few days.
+- **Activity notifications:** quest reminders, streak alerts, level-ups, rewards earned or about to expire, a daily motivation message, and a reminder if you have not opened the app for a few days.
 - **Social notifications:** when a friend you invited joins, or when your leaderboard position changes.
 - **Account and service notifications:** for example updates on feedback you sent us.
 - **Offers and announcements:** news, events and offers from HunterX or our reward partners. These are promotional, so they are **off unless you turn them on**, either by ticking "Also send me offers & announcements" when you enable notifications or in Settings → Offers & Announcements.

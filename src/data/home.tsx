@@ -67,8 +67,9 @@ export const FAQS: { question: string; answer: ReactNode }[] = [
     answer: (
       <p>
         HunterX only reads the health data you choose to share through Apple
-        Health or Health Connect, and you can turn that access off at any time
-        in your phone&rsquo;s settings. Our{" "}
+        Health or Health Connect, and it stays on your phone: it&rsquo;s never
+        uploaded to our servers. You can turn that access off at any time in
+        your phone&rsquo;s settings. Our{" "}
         <Link href="/privacy" className={linkClass}>
           Privacy Policy
         </Link>{" "}
