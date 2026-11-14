@@ -1,6 +1,7 @@
 ---
 title: "Terms and Conditions"
-updated: "4 November 2026"
+effective: "15 November 2026"
+updated: "15 November 2026"
 summary: "HunterX is free to download. These Terms explain how the game works, fair play, rewards from our partner Gymgasm, and your rights."
 ---
 
@@ -27,11 +28,15 @@ We may refuse, suspend or close an account if the information is false, if you a
 
 ## 3. Health and Safety
 
-**HunterX is not a medical service.** It does not diagnose, treat or give medical advice, and its quests and tips are general information only.
+**3.1 Not a medical service.** HunterX is not a medical service. It does not diagnose, treat or give medical advice, and its quests and tips are general information only.
 
-Physical activity carries risk. Before you start a new fitness routine, speak to a doctor, especially if you have a health condition, are pregnant, are injured or are returning to exercise after a break. Stop at once if you feel pain, dizziness or discomfort.
+**3.2 Risk and medical checks.** Physical activity carries risk. Before you start a new fitness routine, speak to a doctor, especially if you have a health condition, are pregnant, are injured or are returning to exercise after a break. Stop at once if you feel pain, dizziness or discomfort.
 
-You take part in quests at your own risk and are responsible for choosing activities that are safe for you. Do not do quests in traffic, on unsafe ground or in any place or way that puts you or others in danger. Step counts, heart rate and other figures shown in the app depend on your device and may be inaccurate.
+**3.3 Your own risk.** Any workout, exercise, quest or other activity that we post, suggest or show in HunterX is done entirely at your own risk. Physical activity can cause injury, including sprains, strains, muscle spasms and other physical injury. You are responsible for deciding whether an activity is suitable for you and for choosing a level that is safe for you. Don't do quests in traffic, on unsafe ground, or anywhere that endangers you or others. Figures in the app, such as step counts and heart rate, depend on your device and may be inaccurate.
+
+**3.4 Don't push your limits for rewards.** Never push beyond your limits to keep a streak, complete a quest, earn XP or win a reward. Do not attempt unsafe activities, or put yourself or others at risk, to take a proof photo or complete a task.
+
+**3.5 Responsibility for injury.** As set out in section 14, any injury, sprain, strain, spasm or other physical harm that results from doing an activity from HunterX is your responsibility, to the extent the law allows.
 
 ## 4. Quests, XP, Levels, Streaks and Leaderboards
 
@@ -150,7 +155,7 @@ Nothing in these Terms limits any right you have under consumer protection or ot
 To the fullest extent the law allows:
 
 - Hunterx Technologies, its owners, staff and partners (including Gymgasm) are not liable for any indirect, incidental, special or consequential loss, or for loss of data, profit, progress or rewards, arising from your use of the Services;
-- we are not liable for injury, illness or loss caused by physical activity you do, whether or not you did it as part of a quest; and
+- we are not liable for injury (including sprains, strains and muscle spasms), illness or loss caused by physical activity you do, whether or not you did it as part of a quest or workout we posted; and
 - our total liability to you for any claim about the Services will not exceed INR 5,000 or the amount you paid us in the 12 months before the claim, whichever is higher.
 
 Nothing in these Terms excludes or limits liability that the law does not allow to be excluded, such as liability for fraud or for death or personal injury caused by our own negligence where the law says so.

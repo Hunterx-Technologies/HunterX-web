@@ -47,8 +47,18 @@ export default async function LegalIndexPage() {
             {doc.summary && (
               <p className="mt-3 flex-1 text-muted-foreground">{doc.summary}</p>
             )}
-            {doc.updated && (
+            {doc.effective && (
               <p className="mt-5 text-sm text-muted-foreground">
+                Effective:{" "}
+                <time dateTime={doc.effectiveIso} className="text-foreground">
+                  {doc.effective}
+                </time>
+              </p>
+            )}
+            {doc.updated && (
+              <p
+                className={`${doc.effective ? "mt-1" : "mt-5"} text-sm text-muted-foreground`}
+              >
                 Last updated:{" "}
                 <time dateTime={doc.updatedIso} className="text-foreground">
                   {doc.updated}

@@ -18,6 +18,10 @@ export type LegalDocument = {
   updated?: string;
   /** Machine-readable version (YYYY-MM-DD) for <time> and the sitemap. */
   updatedIso?: string;
+  /** When this version takes effect, as written in the frontmatter (optional). */
+  effective?: string;
+  /** Machine-readable effective date (YYYY-MM-DD) for <time>. */
+  effectiveIso?: string;
   body: string;
   /** One entry per `##` heading, in order. */
   toc: TocItem[];
@@ -115,6 +119,8 @@ export async function getLegalDocument(
     summary: typeof data.summary === "string" ? data.summary : undefined,
     updated: toDisplayDate(data.updated),
     updatedIso: toIsoDate(data.updated),
+    effective: toDisplayDate(data.effective),
+    effectiveIso: toIsoDate(data.effective),
     body: content,
     toc: buildToc(content),
   };

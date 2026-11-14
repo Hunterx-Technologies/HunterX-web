@@ -43,15 +43,35 @@ export function LegalPage({ doc }: { doc: LegalDocument }) {
         <h1 className="text-3xl font-extrabold tracking-tight uppercase sm:text-5xl">
           {doc.title}
         </h1>
-        {doc.updated && (
+        {(doc.effective || doc.updated) && (
           <p className="mt-5 text-sm text-muted-foreground">
-            Last updated:{" "}
-            <time
-              dateTime={doc.updatedIso}
-              className="font-medium text-foreground"
-            >
-              {doc.updated}
-            </time>
+            {doc.effective && (
+              <>
+                Effective:{" "}
+                <time
+                  dateTime={doc.effectiveIso}
+                  className="font-medium text-foreground"
+                >
+                  {doc.effective}
+                </time>
+              </>
+            )}
+            {doc.effective && doc.updated && (
+              <span aria-hidden="true" className="mx-2">
+                ·
+              </span>
+            )}
+            {doc.updated && (
+              <>
+                Last updated:{" "}
+                <time
+                  dateTime={doc.updatedIso}
+                  className="font-medium text-foreground"
+                >
+                  {doc.updated}
+                </time>
+              </>
+            )}
           </p>
         )}
       </header>
