@@ -5,6 +5,7 @@ import { pageMetadata } from "@/lib/seo";
 import { buttonVariants } from "@/components/ui/button";
 import { Container, Eyebrow } from "@/components/ui/section";
 import { CopyCodeButton } from "@/components/site/copy-code-button";
+import { InviteAutoOpen } from "@/components/site/invite-auto-open";
 import { StoreButtons } from "@/components/site/store-buttons";
 
 export async function generateMetadata({
@@ -66,6 +67,7 @@ export default async function InvitePage({
 
   return (
     <section className="relative isolate">
+      <InviteAutoOpen code={code} />
       <Backdrop />
       <Container className="max-w-2xl py-24 text-center sm:py-32">
         <Eyebrow className="justify-center">Invite</Eyebrow>
