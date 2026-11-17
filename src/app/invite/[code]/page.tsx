@@ -1,11 +1,10 @@
 import type { Metadata } from "next";
-import { ExternalLink } from "lucide-react";
-import { inviteDeepLink, isValidInviteCode } from "@/lib/invite";
+import { isValidInviteCode } from "@/lib/invite";
 import { pageMetadata } from "@/lib/seo";
-import { buttonVariants } from "@/components/ui/button";
 import { Container, Eyebrow } from "@/components/ui/section";
 import { CopyCodeButton } from "@/components/site/copy-code-button";
 import { InviteAutoOpen } from "@/components/site/invite-auto-open";
+import { OpenInAppButton } from "@/components/site/open-in-app-button";
 import { StoreButtons } from "@/components/site/store-buttons";
 
 export async function generateMetadata({
@@ -90,13 +89,7 @@ export default async function InvitePage({
 
         <div className="mt-8 flex flex-wrap justify-center gap-3">
           <CopyCodeButton code={code} />
-          <a
-            href={inviteDeepLink(code)}
-            className={buttonVariants({ variant: "secondary", size: "lg" })}
-          >
-            Open in app
-            <ExternalLink aria-hidden="true" className="size-4" />
-          </a>
+          <OpenInAppButton code={code} />
         </div>
 
         <h2 className="mt-16 text-xl font-semibold tracking-tight">

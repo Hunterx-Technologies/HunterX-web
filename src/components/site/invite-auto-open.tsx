@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect } from "react";
-import { ANDROID_PACKAGE, APP_SCHEME } from "@/config";
+import { inviteAndroidIntentLink } from "@/lib/invite";
 
 /* ---------------------------------------------------------------------------
  * Opens the HunterX app as soon as the invite page loads, so someone who
@@ -13,6 +13,8 @@ import { ANDROID_PACKAGE, APP_SCHEME } from "@/config";
  *
  * Android only: Chrome opens the app when it's installed and otherwise loads
  * browser_fallback_url (this page with ?app=0, so it doesn't retry and loop).
+ * In-app browsers (Google Lens, Gmail…) block this redirect because there was
+ * no tap; OpenInAppButton then opens the app on the first tap.
  * iOS has no silent equivalent: a custom scheme for an app that isn't
  * installed shows a Safari error, so iOS keeps the button.
  * ------------------------------------------------------------------------- */
@@ -34,10 +36,7 @@ export function InviteAutoOpen({ code }: { code: string }) {
 
     const fallback = new URL(window.location.pathname, window.location.origin);
     fallback.searchParams.set("app", "0");
-    window.location.href =
-      `intent://invite/${encodeURIComponent(code)}` +
-      `#Intent;scheme=${APP_SCHEME};package=${ANDROID_PACKAGE};` +
-      `S.browser_fallback_url=${encodeURIComponent(fallback.toString())};end`;
+    window.location.href = inviteAndroidIntentLink(code, fallback.toString());
   }, [code]);
 
   return null;
